@@ -17,11 +17,7 @@
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./formatters/*"]
-    }
+    "skipLibCheck": true
   },
   "include": ["formatters/**/*", "index.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.js"]
