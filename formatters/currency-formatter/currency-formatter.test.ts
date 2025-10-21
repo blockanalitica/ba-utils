@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatCurrencyCompact, formatCurrencyFull } from './currency-format'
+import { formatCurrencyCompact, formatCurrencyFull } from './currency-formatter'
 
 describe('formatCurrencyCompact', () => {
   describe('Basic number formatting without currency', () => {

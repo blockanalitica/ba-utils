@@ -2,13 +2,13 @@
 export {
   formatNumberCompact,
   formatNumberFull,
-} from './formatters/number-format/number-format.js'
+} from './formatters/number-formatter/number-formatter.js'
 
 // Currency formatters
 export {
   formatCurrencyCompact,
   formatCurrencyFull,
-} from './formatters/currency-format/currency-format.js'
+} from './formatters/currency-formatter/currency-formatter.js'
 
 // Percentage formatters
-export { formatPercentage } from './formatters/percentages-format/percentages-format.js'
+export { formatPercentage } from './formatters/percentages-formatter/percentages-formatter.js'
