@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatNumberCompact, formatNumberFull } from './number-format'
+import { formatNumberCompact, formatNumberFull } from './number-formatter'
 
 describe('formatNumberCompact', () => {
   describe('given valid numeric inputs', () => {

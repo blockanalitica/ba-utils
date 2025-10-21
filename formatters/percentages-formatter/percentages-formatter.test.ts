@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatPercentage } from './percentages-format'
+import { formatPercentage } from './percentages-formatter'
 
 describe('formatPercentage', () => {
   describe('Basic percentage formatting', () => {

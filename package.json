@@ -14,17 +14,17 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./number-format": {
-      "import": "./dist/formatters/number-format/number-format.js",
-      "types": "./dist/formatters/number-format/number-format.d.ts"
+    "./number-formatter": {
+      "import": "./dist/formatters/number-formatter/number-formatter.js",
+      "types": "./dist/formatters/number-formatter/number-formatter.d.ts"
     },
-    "./currency-format": {
-      "import": "./dist/formatters/currency-format/currency-format.js",
-      "types": "./dist/formatters/currency-format/currency-format.d.ts"
+    "./currency-formatter": {
+      "import": "./dist/formatters/currency-formatter/currency-formatter.js",
+      "types": "./dist/formatters/currency-formatter/currency-formatter.d.ts"
     },
-    "./percentages-format": {
-      "import": "./dist/formatters/percentages-format/percentages-format.js",
-      "types": "./dist/formatters/percentages-format/percentages-format.d.ts"
+    "./percentages-formatter": {
+      "import": "./dist/formatters/percentages-formatter/percentages-formatter.js",
+      "types": "./dist/formatters/percentages-formatter/percentages-formatter.d.ts"
     }
   },
   "scripts": {
