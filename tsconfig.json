@@ -23,6 +23,6 @@
       "@/*": ["./formatters/*"]
     }
   },
-  "include": ["formatters/**/*", "index.ts", "vitest.config.ts"],
+  "include": ["formatters/**/*", "index.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.js"]
 }
