@@ -1,14 +1,6 @@
 # ba-utils
 
-A TypeScript Node.js project with modern tooling.
-
-## Features
-
-- TypeScript (latest)
-- ESLint with TypeScript support
-- Prettier for code formatting
-- Vitest for testing
-- Path aliases (`@/` for `src/`)
+A set of utilities for JavaScript/TypeScript projects.
 
 ## Scripts
 
@@ -21,16 +13,6 @@ A TypeScript Node.js project with modern tooling.
 - `pnpm format` - Format code with Prettier
 - `pnpm format:check` - Check code formatting
 - `pnpm typecheck` - Type check without emitting files
-
-## Project Structure
-
-```
-ba-utils/
-├── src/          # Source files
-├── tests/        # Test files
-├── dist/         # Build output
-└── ...config files
-```
 
 ## Getting Started
 
