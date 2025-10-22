@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-            fetch-depth: 0
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
@@ -35,8 +35,5 @@ jobs:
       - name: Build package
         run: pnpm build
 
-      # - name: Semantic Release
-      #   run: pnpm semantic-release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Semantic Release
+        run: pnpm semantic-release

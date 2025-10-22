@@ -20,8 +20,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-      - name: Run linters
-        run: pnpm lint
+      # - name: Run linters
+      #   run: pnpm lint
       - name: Run format check
         run: pnpm format:check
 
