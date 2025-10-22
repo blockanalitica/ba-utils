@@ -42,7 +42,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run typescript check
-        run: bun typecheck
+        run: pnpm typecheck
 
   tests:
     name: Tests

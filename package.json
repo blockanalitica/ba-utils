@@ -1,8 +1,7 @@
 {
-  "name": "ba-utils",
+  "name": "@blockanalitica/utils",
   "version": "0.1.0",
   "description": "",
-  "private": true,
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
