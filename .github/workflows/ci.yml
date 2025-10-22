@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  workflow_call:
+
+jobs:
+  linters:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: 'pnpm'
+      - uses: pnpm/action-setup@v4
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run linters
+        run: pnpm lint
+      - name: Run format check
+        run: pnpm format:check
+
+  typescript-check:
+    name: Type check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: 'pnpm'
+      - uses: pnpm/action-setup@v4
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run typescript check
+        run: bun typecheck
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: 'pnpm'
+      - uses: pnpm/action-setup@v4
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run typescript check
+        run: pnpm test:run
