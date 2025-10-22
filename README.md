@@ -1,4 +1,4 @@
-# ba-utils
+# @blockanalitica/utils
 
 A set of utilities for JavaScript/TypeScript projects.
 
@@ -26,9 +26,4 @@ A set of utilities for JavaScript/TypeScript projects.
 
    ```bash
    pnpm test
-   ```
-
-3. Build the project:
-   ```bash
-   pnpm build
    ```
