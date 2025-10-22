@@ -31,9 +31,9 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-
       - name: Build package
         run: pnpm build
-
       - name: Semantic Release
         run: pnpm semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
