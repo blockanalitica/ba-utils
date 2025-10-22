@@ -17,11 +17,18 @@ jobs:
     runs-on: ubuntu-latest
     name: 'Semantic Release'
     steps:
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v5
+        with:
+            fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
+      - name: Install Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: 'pnpm'
-      - uses: pnpm/action-setup@v4
       - name: Install dependencies
         run: pnpm install
 
