@@ -8,10 +8,9 @@
   "files": [
     "dist"
   ],
+  "repository": "https://github.com/blockanalitica/ba-utils",
   "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "provenance": true
+    "access": "public"
   },
   "exports": {
     ".": {
