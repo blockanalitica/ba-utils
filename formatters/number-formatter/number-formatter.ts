@@ -1,4 +1,4 @@
-import { FormatNumberOptions } from '../types.js'
+import { FractionOptions } from '../types.js'
 
 /**
  * Formats a number using compact notation (e.g., 1.5K, 2.3M, 1.2B).
@@ -50,12 +50,12 @@ import { FormatNumberOptions } from '../types.js'
  */
 export function formatNumberCompact(
   value: number | string,
-  options?: FormatNumberOptions
+  options?: FractionOptions
 ): string {
   return formatNumber(
     value,
     { notation: 'compact', compactDisplay: 'short' },
-    options ?? ({} as FormatNumberOptions)
+    options ?? ({} as FractionOptions)
   )
 }
 
@@ -110,12 +110,12 @@ export function formatNumberCompact(
  */
 export function formatNumberFull(
   value: number | string,
-  options?: FormatNumberOptions
+  options?: FractionOptions
 ): string {
   return formatNumber(
     value,
     { notation: 'standard' },
-    options ?? ({} as FormatNumberOptions)
+    options ?? ({} as FractionOptions)
   )
 }
 
@@ -131,7 +131,7 @@ type NotationOptions =
 function formatNumber(
   value: number | string,
   notationOptions: NotationOptions,
-  options: FormatNumberOptions
+  options: FractionOptions
 ): string {
   if (value === null || value === undefined || value === '') {
     return '-'
