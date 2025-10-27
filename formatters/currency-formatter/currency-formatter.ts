@@ -1,12 +1,4 @@
-/**
- * Options for formatting currency with compact notation.
- */
-type Options = {
-  /** Minimum number of decimal places to display (default: 2) */
-  minimumFractionDigits?: number
-  /** Maximum number of decimal places to display (default: 2) */
-  maximumFractionDigits?: number
-}
+import { FormatNumberOptions } from '../types.js'
 
 /**
  * Formats a number as currency with compact notation (e.g., $1.5K, $2.3M, $1.2B).
@@ -71,9 +63,14 @@ type Options = {
 export function formatCurrencyCompact(
   value: number | string,
   currency: string = 'USD',
-  options: Options = {}
+  options?: FormatNumberOptions
 ): string {
-  return formatCurrency(value, 'compact', currency, options)
+  return formatCurrency(
+    value,
+    'compact',
+    currency,
+    options ?? ({} as FormatNumberOptions)
+  )
 }
 
 /**
@@ -140,16 +137,21 @@ export function formatCurrencyCompact(
 export function formatCurrencyFull(
   value: number | string,
   currency: string = 'USD',
-  options: Options = {}
+  options?: FormatNumberOptions
 ): string {
-  return formatCurrency(value, 'standard', currency, options)
+  return formatCurrency(
+    value,
+    'standard',
+    currency,
+    options ?? ({} as FormatNumberOptions)
+  )
 }
 
 function formatCurrency(
   value: number | string,
   notation: 'standard' | 'compact',
   currency: string = 'USD',
-  options: Options = {}
+  options: FormatNumberOptions
 ): string {
   // Edge case: empty string or whitespace-only currency
   if (currency === '' || currency.trim() === '') {
