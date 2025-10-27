@@ -1,12 +1,4 @@
-/**
- * Options for formatting numbers.
- */
-type FormatNumberOptions = {
-  /** Minimum number of decimal places to display (default: 0) */
-  minimumFractionDigits?: number
-  /** Maximum number of decimal places to display (default: 2) */
-  maximumFractionDigits?: number
-}
+import { FractionOptions } from '../types.js'
 
 /**
  * Formats a number using compact notation (e.g., 1.5K, 2.3M, 1.2B).
@@ -58,12 +50,12 @@ type FormatNumberOptions = {
  */
 export function formatNumberCompact(
   value: number | string,
-  options: FormatNumberOptions = {}
+  options?: FractionOptions
 ): string {
   return formatNumber(
     value,
     { notation: 'compact', compactDisplay: 'short' },
-    options
+    options ?? ({} as FractionOptions)
   )
 }
 
@@ -118,9 +110,13 @@ export function formatNumberCompact(
  */
 export function formatNumberFull(
   value: number | string,
-  options: FormatNumberOptions = {}
+  options?: FractionOptions
 ): string {
-  return formatNumber(value, { notation: 'standard' }, options)
+  return formatNumber(
+    value,
+    { notation: 'standard' },
+    options ?? ({} as FractionOptions)
+  )
 }
 
 type NotationOptions =
@@ -135,7 +131,7 @@ type NotationOptions =
 function formatNumber(
   value: number | string,
   notationOptions: NotationOptions,
-  options: FormatNumberOptions
+  options: FractionOptions
 ): string {
   if (value === null || value === undefined || value === '') {
     return '-'
