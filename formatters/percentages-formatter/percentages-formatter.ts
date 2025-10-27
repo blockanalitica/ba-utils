@@ -1,4 +1,4 @@
-import { FormatNumberOptions } from '../types.js'
+import { FractionOptions } from '../types.js'
 
 /**
  * Formats a decimal number as a percentage with the % symbol (e.g., 0.5 → "50%", 0.1234 → "12.34%").
@@ -43,7 +43,7 @@ import { FormatNumberOptions } from '../types.js'
  */
 export function formatPercentage(
   value: number,
-  options?: FormatNumberOptions
+  options?: FractionOptions
 ): string {
   if (value === null || value === undefined || isNaN(value)) {
     return '-'
