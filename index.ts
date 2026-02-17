@@ -1,3 +1,6 @@
+// Types
+export type { FractionOptions } from './formatters/types.js'
+
 // Number formatters
 export {
   formatNumberCompact,

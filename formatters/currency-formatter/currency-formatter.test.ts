@@ -559,9 +559,7 @@ describe('formatCurrencyCompact', () => {
     it('uses dynamic threshold with maximumFractionDigits=4', () => {
       const opts = { minimumFractionDigits: 4, maximumFractionDigits: 4 }
       expect(formatCurrencyCompact(0.00009, 'USD', opts)).toBe('<$0.0001')
-      expect(formatCurrencyCompact(0.00009, 'USDC', opts)).toBe(
-        '<0.0001 USDC'
-      )
+      expect(formatCurrencyCompact(0.00009, 'USDC', opts)).toBe('<0.0001 USDC')
       expect(formatCurrencyCompact(0.0001, 'USD', opts)).toBe('$0.0001')
     })
 

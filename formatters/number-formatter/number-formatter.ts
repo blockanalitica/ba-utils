@@ -112,11 +112,7 @@ export function formatNumberFull(
   value: number | string,
   options?: FractionOptions
 ): string {
-  return formatNumber(
-    value,
-    { notation: 'standard' },
-    options
-  )
+  return formatNumber(value, { notation: 'standard' }, options)
 }
 
 type NotationOptions =
@@ -143,8 +139,7 @@ function formatNumber(
     return '-'
   }
 
-  const { minimumFractionDigits = 0, maximumFractionDigits = 2 } =
-    options ?? {}
+  const { minimumFractionDigits = 0, maximumFractionDigits = 2 } = options ?? {}
 
   return new Intl.NumberFormat('en-US', {
     ...notationOptions,

@@ -49,4 +49,4 @@ All formatters use `Intl.NumberFormat` with `en-US` locale. Currency formatter s
 - No semicolons, single quotes, 2-space indent, trailing commas (es5)
 - `@typescript-eslint/no-explicit-any` is an error
 - Strict TypeScript (`noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`)
-- Type-checked ESLint rules relaxed in test files (no-unsafe-* rules disabled)
+- Type-checked ESLint rules relaxed in test files (no-unsafe-\* rules disabled)
