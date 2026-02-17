@@ -1,3 +1,5 @@
+import { FractionOptions } from '../types.js'
+
 /**
  * Formats a decimal number as a percentage with the % symbol (e.g., 0.5 → "50%", 0.1234 → "12.34%").
  *
@@ -39,13 +41,10 @@
  * - Supports negative percentages with proper sign handling
  * - Handles Infinity as "∞%" and -Infinity as "-∞%"
  */
-
-type Options = {
-  minimumFractionDigits?: number
-  maximumFractionDigits?: number
-}
-
-export function formatPercentage(value: number, options: Options = {}): string {
+export function formatPercentage(
+  value: number,
+  options?: FractionOptions
+): string {
   if (value === null || value === undefined || isNaN(value)) {
     return '-'
   }
@@ -57,7 +56,7 @@ export function formatPercentage(value: number, options: Options = {}): string {
     return '<0.01%'
   }
 
-  const { minimumFractionDigits = 0, maximumFractionDigits = 2 } = options
+  const { minimumFractionDigits = 0, maximumFractionDigits = 2 } = options ?? {}
 
   return new Intl.NumberFormat('en-US', {
     style: 'percent',

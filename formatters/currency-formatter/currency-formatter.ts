@@ -1,12 +1,4 @@
-/**
- * Options for formatting currency with compact notation.
- */
-type Options = {
-  /** Minimum number of decimal places to display (default: 2) */
-  minimumFractionDigits?: number
-  /** Maximum number of decimal places to display (default: 2) */
-  maximumFractionDigits?: number
-}
+import { FractionOptions } from '../types.js'
 
 /**
  * Formats a number as currency with compact notation (e.g., $1.5K, $2.3M, $1.2B).
@@ -71,7 +63,7 @@ type Options = {
 export function formatCurrencyCompact(
   value: number | string,
   currency: string = 'USD',
-  options: Options = {}
+  options?: FractionOptions
 ): string {
   return formatCurrency(value, 'compact', currency, options)
 }
@@ -140,7 +132,7 @@ export function formatCurrencyCompact(
 export function formatCurrencyFull(
   value: number | string,
   currency: string = 'USD',
-  options: Options = {}
+  options?: FractionOptions
 ): string {
   return formatCurrency(value, 'standard', currency, options)
 }
@@ -149,7 +141,7 @@ function formatCurrency(
   value: number | string,
   notation: 'standard' | 'compact',
   currency: string = 'USD',
-  options: Options = {}
+  options?: FractionOptions
 ): string {
   // Edge case: empty string or whitespace-only currency
   if (currency === '' || currency.trim() === '') {
@@ -175,7 +167,27 @@ function formatCurrency(
     return '-'
   }
 
-  const { minimumFractionDigits = 2, maximumFractionDigits = 2 } = options
+  const { minimumFractionDigits = 2, maximumFractionDigits = 2 } = options ?? {}
+
+  if (maximumFractionDigits >= 1) {
+    const absValue = Math.abs(numValue)
+    const threshold = 1 / Math.pow(10, maximumFractionDigits)
+
+    if (absValue > 0 && absValue < threshold) {
+      const formattedThreshold = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: maximumFractionDigits,
+        maximumFractionDigits: maximumFractionDigits,
+      }).format(threshold)
+
+      if (currency === 'USD') {
+        return `<${formattedThreshold}`
+      }
+      const withoutCurrency = formattedThreshold.replace('$', '')
+      return `<${withoutCurrency} ${currency}`
+    }
+  }
 
   const formattedValue = new Intl.NumberFormat('en-US', {
     notation,

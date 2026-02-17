@@ -186,7 +186,7 @@ describe('formatCurrencyCompact', () => {
 
     it('should handle very small decimal values with currency', () => {
       expect(formatCurrencyCompact(0.01)).toBe('$0.01')
-      expect(formatCurrencyCompact(0.001)).toBe('$0.00')
+      expect(formatCurrencyCompact(0.001)).toBe('<$0.01')
       expect(
         formatCurrencyCompact(0.001, 'USD', {
           minimumFractionDigits: 3,
@@ -521,6 +521,59 @@ describe('formatCurrencyCompact', () => {
       expect(formatCurrencyCompact('invalid', 'SKY')).toBe('-')
     })
   })
+
+  describe('Less-than threshold for very small values', () => {
+    it('shows <$0.01 for positive USD values below 0.01', () => {
+      expect(formatCurrencyCompact(0.009)).toBe('<$0.01')
+      expect(formatCurrencyCompact(0.001)).toBe('<$0.01')
+      expect(formatCurrencyCompact(0.0001)).toBe('<$0.01')
+    })
+
+    it('shows <$0.01 for negative USD values below 0.01 (no sign)', () => {
+      expect(formatCurrencyCompact(-0.009)).toBe('<$0.01')
+      expect(formatCurrencyCompact(-0.001)).toBe('<$0.01')
+    })
+
+    it('shows <0.01 CURRENCY for crypto values below 0.01', () => {
+      expect(formatCurrencyCompact(0.009, 'USDC')).toBe('<0.01 USDC')
+      expect(formatCurrencyCompact(0.001, 'DAI')).toBe('<0.01 DAI')
+      expect(formatCurrencyCompact(0.0001, 'SKY')).toBe('<0.01 SKY')
+    })
+
+    it('shows <0.01 CURRENCY for negative crypto values (no sign)', () => {
+      expect(formatCurrencyCompact(-0.009, 'USDC')).toBe('<0.01 USDC')
+      expect(formatCurrencyCompact(-0.001, 'DAI')).toBe('<0.01 DAI')
+    })
+
+    it('does not trigger for values at or above threshold', () => {
+      expect(formatCurrencyCompact(0.01)).toBe('$0.01')
+      expect(formatCurrencyCompact(0.02)).toBe('$0.02')
+      expect(formatCurrencyCompact(0.01, 'USDC')).toBe('0.01 USDC')
+    })
+
+    it('does not trigger for zero', () => {
+      expect(formatCurrencyCompact(0)).toBe('$0.00')
+      expect(formatCurrencyCompact(0, 'USDC')).toBe('0.00 USDC')
+    })
+
+    it('uses dynamic threshold with maximumFractionDigits=4', () => {
+      const opts = { minimumFractionDigits: 4, maximumFractionDigits: 4 }
+      expect(formatCurrencyCompact(0.00009, 'USD', opts)).toBe('<$0.0001')
+      expect(formatCurrencyCompact(0.00009, 'USDC', opts)).toBe('<0.0001 USDC')
+      expect(formatCurrencyCompact(0.0001, 'USD', opts)).toBe('$0.0001')
+    })
+
+    it('skips threshold when maximumFractionDigits=0', () => {
+      const opts = { minimumFractionDigits: 0, maximumFractionDigits: 0 }
+      expect(formatCurrencyCompact(0.5, 'USD', opts)).toBe('$1')
+      expect(formatCurrencyCompact(0.99, 'USDC', opts)).toBe('1 USDC')
+    })
+
+    it('works with string input', () => {
+      expect(formatCurrencyCompact('0.001')).toBe('<$0.01')
+      expect(formatCurrencyCompact('0.001', 'USDC')).toBe('<0.01 USDC')
+    })
+  })
 })
 
 describe('formatCurrencyFull', () => {
@@ -710,7 +763,7 @@ describe('formatCurrencyFull', () => {
 
     it('should handle very small decimal values with currency', () => {
       expect(formatCurrencyFull(0.01)).toBe('$0.01')
-      expect(formatCurrencyFull(0.001)).toBe('$0.00')
+      expect(formatCurrencyFull(0.001)).toBe('<$0.01')
       expect(
         formatCurrencyFull(0.001, 'USD', {
           minimumFractionDigits: 3,
@@ -1055,6 +1108,59 @@ describe('formatCurrencyFull', () => {
       )
       expect(formatCurrencyFull(NaN, 'DAI')).toBe('-')
       expect(formatCurrencyFull('invalid', 'SKY')).toBe('-')
+    })
+  })
+
+  describe('Less-than threshold for very small values', () => {
+    it('shows <$0.01 for positive USD values below 0.01', () => {
+      expect(formatCurrencyFull(0.009)).toBe('<$0.01')
+      expect(formatCurrencyFull(0.001)).toBe('<$0.01')
+      expect(formatCurrencyFull(0.0001)).toBe('<$0.01')
+    })
+
+    it('shows <$0.01 for negative USD values below 0.01 (no sign)', () => {
+      expect(formatCurrencyFull(-0.009)).toBe('<$0.01')
+      expect(formatCurrencyFull(-0.001)).toBe('<$0.01')
+    })
+
+    it('shows <0.01 CURRENCY for crypto values below 0.01', () => {
+      expect(formatCurrencyFull(0.009, 'USDC')).toBe('<0.01 USDC')
+      expect(formatCurrencyFull(0.001, 'DAI')).toBe('<0.01 DAI')
+      expect(formatCurrencyFull(0.0001, 'SKY')).toBe('<0.01 SKY')
+    })
+
+    it('shows <0.01 CURRENCY for negative crypto values (no sign)', () => {
+      expect(formatCurrencyFull(-0.009, 'USDC')).toBe('<0.01 USDC')
+      expect(formatCurrencyFull(-0.001, 'DAI')).toBe('<0.01 DAI')
+    })
+
+    it('does not trigger for values at or above threshold', () => {
+      expect(formatCurrencyFull(0.01)).toBe('$0.01')
+      expect(formatCurrencyFull(0.02)).toBe('$0.02')
+      expect(formatCurrencyFull(0.01, 'USDC')).toBe('0.01 USDC')
+    })
+
+    it('does not trigger for zero', () => {
+      expect(formatCurrencyFull(0)).toBe('$0.00')
+      expect(formatCurrencyFull(0, 'USDC')).toBe('0.00 USDC')
+    })
+
+    it('uses dynamic threshold with maximumFractionDigits=4', () => {
+      const opts = { minimumFractionDigits: 4, maximumFractionDigits: 4 }
+      expect(formatCurrencyFull(0.00009, 'USD', opts)).toBe('<$0.0001')
+      expect(formatCurrencyFull(0.00009, 'USDC', opts)).toBe('<0.0001 USDC')
+      expect(formatCurrencyFull(0.0001, 'USD', opts)).toBe('$0.0001')
+    })
+
+    it('skips threshold when maximumFractionDigits=0', () => {
+      const opts = { minimumFractionDigits: 0, maximumFractionDigits: 0 }
+      expect(formatCurrencyFull(0.5, 'USD', opts)).toBe('$1')
+      expect(formatCurrencyFull(0.99, 'USDC', opts)).toBe('1 USDC')
+    })
+
+    it('works with string input', () => {
+      expect(formatCurrencyFull('0.001')).toBe('<$0.01')
+      expect(formatCurrencyFull('0.001', 'USDC')).toBe('<0.01 USDC')
     })
   })
 })
