@@ -1,7 +1,7 @@
 {
   "name": "@blockanalitica/utils",
-  "version": "0.1.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "A set of utilities for JavaScript/TypeScript projects.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -43,8 +43,11 @@
     "typecheck": "tsc --noEmit",
     "verify": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test:run"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "utils",
+    "formatters",
+    "Block Analitica"
+  ],
   "license": "MIT",
   "packageManager": "pnpm@10.17.1",
   "devDependencies": {
