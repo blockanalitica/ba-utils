@@ -179,6 +179,26 @@ function formatCurrency(
 
   const { minimumFractionDigits = 2, maximumFractionDigits = 2 } = options
 
+  if (maximumFractionDigits >= 1) {
+    const absValue = Math.abs(numValue)
+    const threshold = 1 / Math.pow(10, maximumFractionDigits)
+
+    if (absValue > 0 && absValue < threshold) {
+      const formattedThreshold = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: maximumFractionDigits,
+        maximumFractionDigits: maximumFractionDigits,
+      }).format(threshold)
+
+      if (currency === 'USD') {
+        return `<${formattedThreshold}`
+      }
+      const withoutCurrency = formattedThreshold.replace('$', '')
+      return `<${withoutCurrency} ${currency}`
+    }
+  }
+
   const formattedValue = new Intl.NumberFormat('en-US', {
     notation,
     minimumFractionDigits,
