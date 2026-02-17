@@ -55,7 +55,7 @@ export function formatNumberCompact(
   return formatNumber(
     value,
     { notation: 'compact', compactDisplay: 'short' },
-    options ?? ({} as FractionOptions)
+    options
   )
 }
 
@@ -115,7 +115,7 @@ export function formatNumberFull(
   return formatNumber(
     value,
     { notation: 'standard' },
-    options ?? ({} as FractionOptions)
+    options
   )
 }
 
@@ -131,7 +131,7 @@ type NotationOptions =
 function formatNumber(
   value: number | string,
   notationOptions: NotationOptions,
-  options: FractionOptions
+  options?: FractionOptions
 ): string {
   if (value === null || value === undefined || value === '') {
     return '-'
@@ -143,7 +143,8 @@ function formatNumber(
     return '-'
   }
 
-  const { minimumFractionDigits = 0, maximumFractionDigits = 2 } = options
+  const { minimumFractionDigits = 0, maximumFractionDigits = 2 } =
+    options ?? {}
 
   return new Intl.NumberFormat('en-US', {
     ...notationOptions,

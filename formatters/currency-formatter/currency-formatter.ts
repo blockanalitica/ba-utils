@@ -69,7 +69,7 @@ export function formatCurrencyCompact(
     value,
     'compact',
     currency,
-    options ?? ({} as FractionOptions)
+    options
   )
 }
 
@@ -143,7 +143,7 @@ export function formatCurrencyFull(
     value,
     'standard',
     currency,
-    options ?? ({} as FractionOptions)
+    options
   )
 }
 
@@ -151,7 +151,7 @@ function formatCurrency(
   value: number | string,
   notation: 'standard' | 'compact',
   currency: string = 'USD',
-  options: FractionOptions
+  options?: FractionOptions
 ): string {
   // Edge case: empty string or whitespace-only currency
   if (currency === '' || currency.trim() === '') {
@@ -177,7 +177,8 @@ function formatCurrency(
     return '-'
   }
 
-  const { minimumFractionDigits = 2, maximumFractionDigits = 2 } = options
+  const { minimumFractionDigits = 2, maximumFractionDigits = 2 } =
+    options ?? {}
 
   if (maximumFractionDigits >= 1) {
     const absValue = Math.abs(numValue)
